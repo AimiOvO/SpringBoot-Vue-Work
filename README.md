@@ -36,7 +36,8 @@ alipay:
 > npm install
 > npm run dev           //运行项目
 ```
-Vue 项目打包，打包文件在 **gyhr-web\dist**
+Vue 项目打包，打包文件在 **gyhr-web\dist**，可以使用Nginx部署
 ```cmd
 > npm run build:prod    //打包Vue项目
 ```
+***
