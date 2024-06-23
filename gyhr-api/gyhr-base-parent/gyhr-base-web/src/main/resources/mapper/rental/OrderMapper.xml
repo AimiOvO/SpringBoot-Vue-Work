@@ -1,0 +1,61 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.rental.order.mapper.OrderMapper">
+    <select id="getList" resultType="com.gyhr.web.rental.order.entity.Order">
+        SELECT ro.*, rc.cname, hh.home_num, hu.unit_name, hb.build_name
+        FROM rental_order AS ro
+        LEFT JOIN rental_customer AS rc ON ro.customer_id = rc.customer_id
+        LEFT JOIN house_home as hh ON ro.home_id = hh.home_id
+        LEFT JOIN house_unit as hu ON hh.unit_id = hu.unit_id
+        LEFT JOIN house_building AS hb ON hu.build_id = hb.build_id
+        WHERE TRUE
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="homeNum != null and homeNum !='' ">
+            AND hh.home_num LIKE CONCAT('%',#{homeNum},'%')
+        </if>
+        <if test="unitId != null and unitId !='' ">
+            AND hu.unit_id = #{unitId}
+        </if>
+        <if test="buildId != null and buildId !='' ">
+            AND hb.build_id = #{buildId}
+        </if>
+        <if test="orderNum != null and orderNum !='' ">
+            AND ro.order_num LIKE CONCAT('%',#{orderNum},'%')
+        </if>
+        <if test="orderStatus != null and orderStatus !='' ">
+            AND ro.order_status = #{orderStatus}
+        </if>
+        <if test="startTime != null and startTime !='' ">
+            AND ro.create_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null and endTime !='' ">
+            AND ro.create_time <![CDATA[<=]]> #{endTime}
+        </if>
+
+    </select>
+
+    <select id="getOnHomeList" resultType="com.gyhr.web.rental.order.entity.Order">
+        SELECT hh.*, rc.cname, hu.unit_name, hb.build_name
+        FROM rental_order AS ro
+        LEFT JOIN rental_customer AS rc ON ro.customer_id = rc.customer_id
+        LEFT JOIN house_home AS hh ON ro.home_id = hh.home_id
+        LEFT JOIN house_unit as hu ON hh.unit_id = hu.unit_id
+        LEFT JOIN house_building AS hb ON hu.build_id = hb.build_id
+        WHERE TRUE
+        <if test="homeNum != null and homeNum !='' ">
+            AND hh.home_num LIKE CONCAT('%',#{homeNum},'%')
+        </if>
+        <if test="unitId != null and unitId !='' ">
+            AND hu.unit_id = #{unitId}
+        </if>
+        <if test="buildId != null and buildId !='' ">
+            AND hb.build_id = #{buildId}
+        </if>
+          AND ro.order_status = '0'
+    </select>
+</mapper>
+

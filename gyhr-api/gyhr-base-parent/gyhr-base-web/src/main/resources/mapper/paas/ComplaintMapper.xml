@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.paas.complaint.mapper.ComplaintMapper">
+    <select id="getList" resultType="com.gyhr.web.paas.complaint.entity.Complaint">
+        SELECT pc.*, rc.cname, rc.cphone FROM paas_complaint AS pc
+        LEFT JOIN rental_customer AS rc ON pc.customer_id = rc.customer_id
+        WHERE TRUE
+        <if test="title != null and title !='' ">
+            AND pc.title LIKE CONCAT('%',#{title},'%')
+        </if>
+        <if test="content != null and content !='' ">
+            AND pc.content LIKE CONCAT('%',#{content},'%')
+        </if>
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="cphone != null and cphone != '' " >
+            AND rc.cphone LIKE concat('%',#{cphone},'%')
+        </if>
+        <if test="customerId != null and customerId !='' ">
+            AND pc.customer_id = #{customerId}
+        </if>
+        ORDER BY pc.complaint_id DESC
+    </select>
+</mapper>
+

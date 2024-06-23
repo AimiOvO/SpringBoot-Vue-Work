@@ -1,0 +1,19 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.paas.notice.mapper.NoticeMapper">
+    <select id="getList" resultType="com.gyhr.web.paas.notice.entity.Notice">
+        SELECT pn.*, su.uname FROM paas_notice AS pn
+        LEFT JOIN sys_user AS su ON pn.user_id = su.user_id
+        WHERE TRUE
+        <if test="title != null and title !='' ">
+            AND pn.title LIKE CONCAT('%',#{title},'%')
+        </if>
+        <if test="uname != null and uname !='' ">
+            AND su.uname LIKE CONCAT('%',#{uname},'%')
+        </if>
+        ORDER BY pn.notice_id DESC
+    </select>
+</mapper>
+

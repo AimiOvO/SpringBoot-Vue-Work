@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.fee.water.mapper.WaterMapper">
+    <select id="getList" resultType="com.gyhr.web.fee.water.entity.Water">
+        SELECT fw.*, rc.cname, hh.home_num, hu.unit_name, hb.build_name
+        FROM fee_water AS fw
+        LEFT JOIN rental_customer AS rc ON fw.customer_id = rc.customer_id
+        LEFT JOIN house_home as hh ON fw.home_id = hh.home_id
+        LEFT JOIN house_unit as hu ON hh.unit_id = hu.unit_id
+        LEFT JOIN house_building AS hb ON hu.build_id = hb.build_id
+        WHERE TRUE
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="homeNum != null and homeNum !='' ">
+            AND hh.home_num LIKE CONCAT('%',#{homeNum},'%')
+        </if>
+        <if test="payStatus != null and payStatus !='' ">
+            AND fw.pay_status = #{payStatus}
+        </if>
+        <if test="customerId != null and customerId !='' ">
+            AND fw.customer_id = #{customerId}
+        </if>
+        ORDER BY fw.waterfee_id DESC
+    </select>
+</mapper>
+

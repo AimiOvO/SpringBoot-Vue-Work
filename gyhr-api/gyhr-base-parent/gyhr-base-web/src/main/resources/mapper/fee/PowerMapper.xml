@@ -1,0 +1,29 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.fee.power.mapper.PowerMapper">
+    <select id="getList" resultType="com.gyhr.web.fee.power.entity.Power">
+        SELECT fp.*, rc.cname, hh.home_num, hu.unit_name, hb.build_name
+        FROM fee_power AS fp
+        LEFT JOIN rental_customer AS rc ON fp.customer_id = rc.customer_id
+        LEFT JOIN house_home as hh ON fp.home_id = hh.home_id
+        LEFT JOIN house_unit as hu ON hh.unit_id = hu.unit_id
+        LEFT JOIN house_building AS hb ON hu.build_id = hb.build_id
+        WHERE TRUE
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="homeNum != null and homeNum !='' ">
+            AND hh.home_num LIKE CONCAT('%',#{homeNum},'%')
+        </if>
+        <if test="payStatus != null and payStatus !='' ">
+            AND fp.pay_status = #{payStatus}
+        </if>
+        <if test="customerId != null and customerId !='' ">
+            AND fp.customer_id = #{customerId}
+        </if>
+        ORDER BY fp.powerfee_id DESC
+    </select>
+</mapper>
+

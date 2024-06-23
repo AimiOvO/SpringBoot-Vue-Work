@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.gyhr</groupId>
+  <artifactId>gyhr-base-parent</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>gyhr-base-common</module>
+    <module>gyhr-base-web</module>
+  </modules>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.4.4</version>
+  </parent>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <swagger2.version>3.0.0</swagger2.version>
+    <lombok-version>1.18.12</lombok-version>
+    <mybatis-plus.version>3.4.2</mybatis-plus.version>
+    <druid.version>1.2.1</druid.version>
+    <kaptcha.version>2.3.2</kaptcha.version>
+    <fastjson.version>1.2.68</fastjson.version>
+    <commons-lang.version>2.6</commons-lang.version>
+    <commons-collections.version>3.2.2</commons-collections.version>
+    <commons-io.version>2.6</commons-io.version>
+    <mysql-connection.version>8.0.21</mysql-connection.version>
+    <alipay.version>4.35.79.ALL</alipay.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- lombok依赖-->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok-version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!-- mysql驱动-->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connection.version}</version>
+        <scope>runtime</scope>
+      </dependency>
+      <!-- druid连接池-->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+      <!-- mybatis-plus依赖-->
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatis-plus.version}</version>
+      </dependency>
+      <!-- kaptcha图形认证码-->
+      <dependency>
+        <groupId>com.github.penggle</groupId>
+        <artifactId>kaptcha</artifactId>
+        <version>${kaptcha.version}</version>
+      </dependency>
+      <!-- JSON转换工具依赖-->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>${commons-lang.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>${commons-collections.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+      <!-- swagger接口文档依赖-->
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-boot-starter</artifactId>
+        <version>${swagger2.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.alipay.sdk</groupId>
+          <artifactId>alipay-easysdk</artifactId>
+          <version>2.2.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alipay.sdk</groupId>
+        <artifactId>alipay-sdk-java</artifactId>
+        <version>${alipay.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>

@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.fee.parkfee.mapper.ParkfeeMapper">
+    <select id="getList" resultType="com.gyhr.web.fee.parkfee.entity.Parkfee">
+        SELECT fpf.*, rc.cname, fp.park_name, fp.park_type
+        FROM fee_parkfee AS fpf
+        LEFT JOIN rental_customer AS rc ON fpf.customer_id = rc.customer_id
+        LEFT JOIN facility_park as fp ON fpf.park_id = fp.park_id
+        WHERE TRUE
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="parkName != null and parkName !='' ">
+            AND fp.park_name LIKE CONCAT('%',#{parkName},'%')
+        </if>
+        <if test="parkType != null and parkType !='' ">
+            AND fp.park_type = #{parkType}
+        </if>
+        <if test="payStatus != null and payStatus !='' ">
+            AND fpf.pay_status = #{payStatus}
+        </if>
+        <if test="customerId != null and customerId !='' ">
+            AND fpf.customer_id = #{customerId}
+        </if>
+        ORDER BY fpf.parkfee_id DESC
+    </select>
+
+</mapper>
+

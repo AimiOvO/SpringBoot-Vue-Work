@@ -1,0 +1,49 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.rental.customerPark.mapper.CustomerParkMapper">
+    <select id="getList" resultType="com.gyhr.web.rental.customerPark.entity.CustomerPark">
+        SELECT rcp.*, rc.cname, fp.park_name, fp.park_type
+        FROM rental_customer_park AS rcp
+        LEFT JOIN rental_customer AS rc ON rcp.customer_id = rc.customer_id
+        LEFT JOIN facility_park AS fp ON rcp.park_id = fp.park_id
+        WHERE TRUE
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="parkName != null and parkName !='' ">
+            AND fp.park_name LIKE CONCAT('%',#{parkName},'%')
+        </if>
+        <if test="parkType != null and parkType !='' ">
+            AND fp.park_type = #{parkType}
+        </if>
+        <if test="rentalparkNum != null and rentalparkNum !='' ">
+            AND rcp.rentalpark_num LIKE CONCAT('%',#{rentalparkNum},'%')
+        </if>
+        <if test="status != null and status !='' ">
+            AND rcp.`status` = #{status}
+        </if>
+        <if test="startTime != null and startTime !='' ">
+            AND rcp.create_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="endTime != null and endTime !='' ">
+            AND rcp.create_time <![CDATA[<=]]> #{endTime}
+        </if>
+    </select>
+
+    <select id="getOnParkList" resultType="com.gyhr.web.rental.customerPark.entity.CustomerPark">
+        SELECT fp.*, rc.cname FROM rental_customer_park AS rcp
+        LEFT JOIN rental_customer AS rc ON rcp.customer_id = rc.customer_id
+        LEFT JOIN facility_park AS fp ON rcp.park_id = fp.park_id
+        WHERE TRUE
+        <if test="parkName != null and parkName !='' ">
+            AND fp.park_name LIKE CONCAT('%',#{parkName},'%')
+        </if>
+        <if test="parkType != null and parkType !='' ">
+            AND fp.park_type = #{parkType}
+        </if>
+        AND rcp.`status` = '0'
+    </select>
+</mapper>
+

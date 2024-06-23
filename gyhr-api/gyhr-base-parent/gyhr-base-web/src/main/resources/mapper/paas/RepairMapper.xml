@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.paas.repair.mapper.RepairMapper">
+    <select id="getList" resultType="com.gyhr.web.paas.repair.entity.Repair">
+        SELECT pr.*, rc.cname, su.uname, su.uphone
+        FROM paas_repair AS pr
+        LEFT JOIN rental_customer AS rc ON pr.customer_id = rc.customer_id
+        LEFT JOIN sys_user AS su ON pr.user_id = su.user_id
+        WHERE TRUE
+        <if test="repairTitle != null and repairTitle != '' " >
+            AND pr.repair_title LIKE concat('%',#{repairTitle},'%')
+        </if>
+        <if test="repairContent != null and repairContent != '' " >
+            AND pr.repair_content LIKE concat('%',#{repairContent},'%')
+        </if>
+        <if test="cname != null and cname !='' ">
+            AND rc.cname LIKE CONCAT('%',#{cname},'%')
+        </if>
+        <if test="phone != null and phone != '' " >
+            AND pr.phone LIKE concat('%',#{phone},'%')
+        </if>
+        <if test="customerId != null and customerId !='' ">
+            AND pr.customer_id = #{customerId}
+        </if>
+        <if test="userId != null and userId !='' ">
+            AND pr.user_id = #{userId}
+        </if>
+        ORDER BY pr.repair_id DESC
+    </select>
+</mapper>
+

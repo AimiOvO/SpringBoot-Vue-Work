@@ -1,0 +1,40 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gyhr.web.system.user.mapper.UserMapper">
+     <select id="getList" resultType="com.gyhr.web.system.user.entity.User">
+        SELECT su.user_id, su.uname, su.uphone, su.id_card, su.sex, su.status, su.is_enabled, su.username,
+               sr.role_name
+        FROM sys_user AS su
+        LEFT JOIN sys_user_role AS sur ON su.user_id = sur.user_id
+        LEFT JOIN sys_role AS sr ON sur.role_id = sr.role_id
+        WHERE TRUE
+        <if test="uname != null and uname !='' ">
+             AND su.uname LIKE CONCAT('%',#{uname},'%')
+        </if>
+        <if test="uphone != null and uphone != '' " >
+             AND su.uphone LIKE concat('%',#{uphone},'%')
+        </if>
+        <if test="roleId != null and roleId != '' " >
+            AND sr.role_id = #{roleId}
+        </if>
+        AND su.del_flag = '0'
+     </select>
+
+    <select id="getRepairTorList" resultType="com.gyhr.web.system.user.entity.User">
+        SELECT su.user_id, su.uname, su.uphone, su.sex
+        FROM sys_user_role AS sur
+                 LEFT JOIN sys_user AS su ON su.user_id = sur.user_id
+        WHERE TRUE
+        <if test="uname != null and uname !='' ">
+            AND su.uname LIKE CONCAT('%',#{uname},'%')
+        </if>
+        <if test="uphone != null and uphone != '' " >
+            AND su.uphone LIKE concat('%',#{uphone},'%')
+        </if>
+        AND sur.role_id = 7
+        AND su.is_enabled = 1
+        AND su.`status` = 0
+    </select>
+</mapper>

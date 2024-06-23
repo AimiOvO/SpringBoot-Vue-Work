@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.house.home.mapper.HomeMapper">
+    <select id="getList" resultType="com.gyhr.web.house.home.entity.Home">
+        SELECT hb.build_id, hb.build_name, hu.unit_name, hh.* FROM house_building AS hb, house_unit AS hu, house_home AS hh
+        WHERE hb.build_id = hu.build_id AND hu.unit_id = hh.unit_id
+        <if test="buildId != null and buildId !=''">
+            and hb.build_id = #{buildId}
+        </if>
+        <if test="unitId != null and unitId !=''">
+            and hu.unit_id = #{unitId}
+        </if>
+        <if test="homeNum != null and homeNum !=''">
+            and hh.home_num like concat('%',#{homeNum},'%')
+        </if>
+        <if test="status != null and status !=''">
+            and hh.status = #{status}
+        </if>
+        ORDER BY hh.home_num ASC
+    </select>
+</mapper>
+

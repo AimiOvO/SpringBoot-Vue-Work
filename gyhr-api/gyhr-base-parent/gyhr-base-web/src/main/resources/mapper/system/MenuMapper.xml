@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.gyhr.web.system.menu.mapper.MenuMapper">
+    <select id="getMenuByUserId" parameterType="long" resultType="com.gyhr.web.system.menu.entity.Menu">
+        SELECT m.* FROM sys_user_role AS ur
+            LEFT JOIN sys_role AS r ON ur.role_id = r.role_id
+            LEFT JOIN sys_role_menu AS rm ON rm.role_id = r.role_id
+            LEFT JOIN sys_menu AS m ON m.menu_id = rm.menu_id
+        WHERE ur.user_id = #{userId}
+        ORDER BY m.order_num ASC
+    </select>
+
+    <select id="getMenuByRoleId" parameterType="long" resultType="com.gyhr.web.system.menu.entity.Menu">
+        SELECT m.* FROM sys_role_menu AS rm, sys_menu AS m
+        WHERE rm.menu_id = m.menu_id AND rm.role_id = #{roleId}
+        ORDER BY m.order_num ASC
+    </select>
+
+
+    <select id="getMenuByUserIdForCustomer" parameterType="long" resultType="com.gyhr.web.system.menu.entity.Menu">
+        SELECT m.* FROM rental_customer_role AS rcr
+            LEFT JOIN sys_role AS r ON rcr.role_id = r.role_id
+            LEFT JOIN sys_role_menu AS rm ON rm.role_id = r.role_id
+            LEFT JOIN sys_menu AS m ON m.menu_id = rm.menu_id
+        WHERE rcr.customer_id = #{customerId}
+        ORDER BY m.order_num ASC
+    </select>
+</mapper>
+
