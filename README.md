@@ -10,7 +10,7 @@
 + **Natapp**    2.4.0
 ***
 ## 项目构建
-### SpringBoot后端部署
+### SpringBoot 后端部署
 修改项目配置文件 **gyhr-api\gyhr-base-parent\gyhr-base-web\src\main\resources\application-test.yml**
 ```yml
 spring:
@@ -29,14 +29,14 @@ alipay:
 ```
 在**MySQL**中创建 **db_gyhr** 数据库，运行 **db_gyhr.sql** 文件载入数据。
 导入 **gyhr-base-parent** 到 **VSCode** 或 **IDEA** 构建运行或打包项目。
-### Vue前端部署
+### Vue 前端部署
 安装好 **Node.js v12.22.12**，高版本会报错。
-在 **gyhr_web** 中使用 **npm** 构建运行项目
+在 **gyhr_web** 中使用 **npm** 构建运行项目。
 ```cmd
-> npm install
+> npm install           //安装项目依赖
 > npm run dev           //运行项目
 ```
-Vue 项目打包，打包文件在 **gyhr-web\dist**，可以使用Nginx部署
+Vue 项目打包，打包文件在 **gyhr-web\dist**，可以使用Nginx部署。
 ```cmd
 > npm run build:prod    //打包Vue项目
 ```
