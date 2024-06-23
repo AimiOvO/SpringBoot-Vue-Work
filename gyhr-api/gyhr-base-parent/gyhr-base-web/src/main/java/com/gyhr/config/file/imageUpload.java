@@ -2,7 +2,6 @@ package com.gyhr.config.file;
 
 import com.gyhr.utils.ResultUtils;
 import com.gyhr.utils.ResultVo;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,8 +13,7 @@ import java.util.UUID;
 @RequestMapping("/api/img")
 public class imageUpload {
 
-    @Value("${img.uploadPath}")
-    private String uploadPath;
+    private String uploadPath = System.getProperty("user.dir") + "/images";
 
     /**
      * 上传

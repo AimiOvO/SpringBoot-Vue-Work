@@ -1,6 +1,5 @@
 package com.gyhr.config.web;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -9,8 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Value("${img.loadPath}")
-    private String loadPath;
+    private String loadPath = "file:" + System.getProperty("user.dir") + "/images/";
 
     /**
      * 跨域配置
