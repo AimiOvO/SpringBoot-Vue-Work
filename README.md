@@ -29,7 +29,7 @@ alipay:
 ```
 在**MySQL**中创建 **db_gyhr** 数据库，运行 **db_gyhr.sql** 文件载入数据。
 导入 **gyhr-base-parent** 到 **VSCode** 或 **IDEA** 构建运行或打包项目。
-### Vue后端部署
+### Vue前端部署
 安装好 **Node.js v12.22.12**，高版本会报错。
 在 **gyhr_web** 中使用 **npm** 构建运行项目
 ```cmd
