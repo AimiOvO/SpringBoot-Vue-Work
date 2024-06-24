@@ -1,6 +1,6 @@
 # 基于springboot+vue的物业管理
 ***
-参考教程：<a href="https://b23.tv/1rgI3Yy">BV1Rw411R7Ef</a><br>
+参考教程：<a href="https://www.bilibili.com/video/BV1Rw411R7Ef">BV1Rw411R7Ef</a><br>
 ~~毕业设计的**最大难点**在于**盖章**~~。
 ***
 ## 已实现项目功能
