@@ -52,7 +52,7 @@
 ***
 ## 项目构建
 ### SpringBoot 后端部署
-修改项目配置文件 **gyhr-api\gyhr-base-parent\gyhr-base-web\src\main\resources\application-test.yml**
+修改项目配置文件 `gyhr-api\gyhr-base-parent\gyhr-base-web\src\main\resources\application-test.yml`
 ```yml
 spring:
   datasource:
