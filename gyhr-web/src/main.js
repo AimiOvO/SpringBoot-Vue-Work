@@ -26,6 +26,7 @@ Vue.prototype.$resetForm = resetForm;
 Vue.prototype.$myconfirm = myconfirm;
 Vue.prototype.$objCopy = objCopy;
 Vue.prototype.hasPerm = hasPermission;
+Vue.prototype.$apiUrl = process.env.VUE_APP_BASE_API_PRO;
 
 /**
  * If you don't want to use mock-server

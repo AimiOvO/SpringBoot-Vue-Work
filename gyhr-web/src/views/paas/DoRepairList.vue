@@ -62,8 +62,8 @@
                         <el-form-item label="报修图片" v-if="props.row.imgurl != null">
                             <br>
                             <el-image style="width: 150px;height: 150px;margin-right: 20px;"
-                                v-for="url in props.row.imgurl.split(',')" :key="url" :src='url'
-                                :preview-src-list="[url]"></el-image>
+                                v-for="url in props.row.imgurl.split(',')" :key="url" :src='$apiUrl + url'
+                                :preview-src-list="[$apiUrl + url]"></el-image>
                         </el-form-item>
                     </el-form>
                 </template>

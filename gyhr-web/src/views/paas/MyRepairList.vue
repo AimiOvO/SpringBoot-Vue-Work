@@ -58,8 +58,8 @@
                         <el-form-item label="报修图片" v-if="props.row.imgurl != null">
                             <br>
                             <el-image style="width: 150px;height: 150px;margin-right: 20px;"
-                                v-for="url in props.row.imgurl.split(',')" :key="url" :src='url'
-                                :preview-src-list="[url]"></el-image>
+                                v-for="url in props.row.imgurl.split(',')" :key="url" :src='$apiUrl + url'
+                                :preview-src-list="[$apiUrl + url]"></el-image>
                         </el-form-item>
                     </el-form>
                 </template>
@@ -234,9 +234,8 @@ export default {
             formData.append("token", getToken());
             let res = await imgUpload(formData);
             if (res && res.code == 200) {
-                let imgurl = process.env.VUE_APP_BASE_API_PRO + res.data
-                file.url = imgurl
-                file.name = imgurl.split("/").pop()
+                file.url = process.env.VUE_APP_BASE_API_PRO + res.data
+                file.name = res.data
                 this.fileList.push(file)
                 this.$message.success(res.msg);
             }
@@ -270,7 +269,7 @@ export default {
             if (this.addModel.imgurl != null) {
                 let imgList = this.addModel.imgurl.split(",")
                 imgList.forEach((item) => {
-                    this.fileList.push({ name: item.split('/').pop(), url: item })
+                    this.fileList.push({ name: item, url: process.env.VUE_APP_BASE_API_PRO + item })
                 })
             }
             console.log(this.fileList)
@@ -298,7 +297,7 @@ export default {
                 if (valid) {
                     let imgurl = "";
                     this.fileList.forEach((item) => {
-                        imgurl = imgurl + item.url + ","
+                        imgurl = imgurl + item.name + ","
                     })
                     this.addModel.imgurl = imgurl.substring(0, imgurl.lastIndexOf(","));
                     this.addModel.customerId = getUserId()
