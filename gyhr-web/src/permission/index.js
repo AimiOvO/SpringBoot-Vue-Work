@@ -6,11 +6,5 @@ export default function hasPermission(code) {
     if (codeList==null) {
         return tag;
     }
-    for (let i = 0; i < codeList.length; i++) {
-        if (codeList[i] === code) {
-            tag = true;
-            break;
-        }
-    }
-    return tag;
+    return codeList.includes(code);
 }
